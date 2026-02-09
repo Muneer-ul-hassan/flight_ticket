@@ -1,0 +1,62 @@
+ Prompt: Flight Booking Form with Dynamic Logic (Detailed Requirements)
+I want to build a Flight Booking Form with the following complete structure and logic. This form should work smoothly in tools like Fluent Forms, WS Form, Replit, or any visual/no-code environment that supports conditional logic.
+
+✅ 1. Personal Information Section
+Field Label	Type	Required?	Notes
+Full Name	Text	✅	Label: “Full Name (Surname/Given Name)”
+Email Address	Email	✅	Used for booking confirmation
+Phone Number	Phone	✅	With proper formatting
+
+✅ 2. Flight Segments Selection
+Field Label	Type	Required?	Options
+How many flight segments?	Radio	✅	1, 2, 3, 4, 5, 6
+
+Conditional Logic:
+When a user selects a number, only that many Flight Segment Sections should appear.
+
+✅ 3. Flight Segment Section (1–6)
+For each flight segment, display the following fields:
+
+Field Label	Type	Required?	Notes
+Flight Number	Text	✅	Example: QR605
+Operated By (Airline)	Text	✅	Airline name
+From	Text	✅	Origin Airport (IATA code)
+To	Text	✅	Destination Airport
+Date	Date	✅	Departure date
+Departure Time	Time	✅	Time format (HH:MM)
+Arrival Time	Time	✅	Time format (HH:MM)
+
+Display Logic:
+Each Flight Segment block (Flight 2–6) should be conditionally shown if user selects 2 or more, 3 or more, etc.
+
+✅ 4. Passenger Selection
+Field Label	Type	Required?	Options
+How many passengers?	Radio	✅	1, 2, 3, 4, 5, 6
+
+✅ 5. Passenger Information Section (1–6)
+For each passenger, display the following fields:
+
+Field Label	Type	Required?	Notes
+Passenger Name	Text	✅	Full name of passenger
+Baggage Options	Checkbox	❌	Options: Personal Bag, Hand Carry, Checked Bag
+E-Ticket Number	Text	✅	Ticket number for the passenger
+
+Display Logic:
+Each Passenger block (Passenger 2–6) should be conditionally shown if user selects 2 or more, etc.
+
+🔒 6. Consent Section
+Field Label	Type	Required?
+I agree to the booking terms and conditions	Checkbox	✅
+
+💳 7. (Optional) Payment Section
+Field Label	Type	Required?	Notes
+Payment Method	Select	❌	Stripe, PayPal (Optional)
+
+🧠 Logic Summary
+Uses radio buttons to select number of segments & passengers
+
+Shows only the relevant flight or passenger fields
+
+Supports baggage checkboxes, e-ticket inputs, date/time inputs
+
+Form must be clean, responsive, and fully functional
