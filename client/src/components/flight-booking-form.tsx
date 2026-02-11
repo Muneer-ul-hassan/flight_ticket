@@ -22,58 +22,45 @@ interface BrandingOptions {
 
 export default function FlightBookingForm() {
   const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
-  const [branding, setBranding] = useState<BrandingOptions>({
-    logoUrl: "/attached_assets/logo_1750774559281.jpg"
-  });
+  const [branding, setBranding] = useState<BrandingOptions>({});
   const { toast } = useToast();
 
   const form = useForm<FlightBookingForm>({
     resolver: zodResolver(flightBookingSchema),
     defaultValues: {
-      contactName: "Travel Agency Contact",
-      contactEmail: "contact@agency.com",
-      contactPhone: "+1-555-0123",
-      emergencyContactName: "",
-      emergencyContactPhone: "",
       flightSegments: [{
-        departureCity: "",
-        arrivalCity: "",
-        departureDate: "",
-        departureTime: "",
+        from: "",
+        to: "",
+        date: "",
         arrivalDate: "",
+        departureTime: "",
         arrivalTime: "",
         flightNumber: "",
         airline: "",
-        aircraftType: "",
-        seatClass: "",
-        fareBasis: "",
+        ticketType: "economy",
       }],
       passengers: [{
-        title: "",
-        firstName: "",
-        lastName: "",
-        dateOfBirth: "",
-        nationality: "",
-        passportNumber: "",
-        passportExpiry: "",
+        title: "Mr",
+        fullName: "",
+        eTicketNumber: "",
         baggageQuantity: "1",
         baggageWeight: "23kg",
-        mealPreference: "",
+        handBaggageQuantity: "1",
+        handBaggageWeight: "7kg",
+        personalBagQuantity: "1",
+        personalBagWeight: "Small",
       }],
-      specialRequests: "",
     },
   });
 
   const submitBookingMutation = useMutation({
     mutationFn: async (data: FlightBookingForm) => {
       const response = await apiRequest("POST", "/api/bookings", {
-        fullName: data.fullName,
-        email: data.email,
-        phone: data.phone,
+        fullName: "User", // Assuming a generic name or extracting from form if added
+        email: "user@example.com",
+        phone: "00000000",
         flightSegments: data.flightSegments,
         passengers: data.passengers,
-        paymentMethod: data.paymentMethod,
-        consentGiven: data.consentGiven,
       });
       return response.json();
     },
@@ -133,9 +120,9 @@ export default function FlightBookingForm() {
                 <FormItem>
                   <FormLabel>Booking Reference (PNR) *</FormLabel>
                   <FormControl>
-                    <Input 
-                      placeholder="Enter booking reference (e.g., ABC123)" 
-                      {...field} 
+                    <Input
+                      placeholder="Enter booking reference (e.g., ABC123)"
+                      {...field}
                     />
                   </FormControl>
                   <FormMessage />
