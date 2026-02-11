@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
+import { internationalAirports } from "../../international_airports";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
@@ -11,102 +12,6 @@ interface FlightSegmentsSectionProps {
   form: UseFormReturn<FlightBookingForm>;
 }
 
-// International airports list
-const internationalAirports = [
-  // Pakistan
-  "Karachi Jinnah International Airport (KHI)",
-  "Lahore Allama Iqbal International Airport (LHE)", 
-  "Islamabad International Airport (ISB)",
-  "Peshawar Bacha Khan International Airport (PEW)",
-  "Multan International Airport (MUX)",
-  "Sialkot Airport (SKT)",
-  "Faisalabad Airport (LYP)",
-  "Quetta Airport (UET)",
-  
-  // Middle East
-  "Dubai International Airport (DXB)",
-  "Dubai Al Maktoum International Airport (DWC)",
-  "Abu Dhabi International Airport (AUH)",
-  "Sharjah International Airport (SHJ)",
-  "Doha Hamad International Airport (DOH)",
-  "Kuwait International Airport (KWI)",
-  "Bahrain International Airport (BAH)",
-  "Muscat International Airport (MCT)",
-  "Riyadh King Khalid International Airport (RUH)",
-  "Jeddah King Abdulaziz International Airport (JED)",
-  "Dammam King Fahd International Airport (DMM)",
-  
-  // Europe
-  "London Heathrow Airport (LHR)",
-  "London Gatwick Airport (LGW)",
-  "Manchester Airport (MAN)",
-  "Birmingham Airport (BHX)",
-  "Paris Charles de Gaulle Airport (CDG)",
-  "Amsterdam Schiphol Airport (AMS)",
-  "Frankfurt Airport (FRA)",
-  "Munich Airport (MUC)",
-  "Rome Leonardo da Vinci Airport (FCO)",
-  "Madrid Barajas Airport (MAD)",
-  "Barcelona Airport (BCN)",
-  "Zurich Airport (ZUR)",
-  "Vienna International Airport (VIE)",
-  "Brussels Airport (BRU)",
-  "Copenhagen Airport (CPH)",
-  "Stockholm Arlanda Airport (ARN)",
-  "Oslo Airport (OSL)",
-  "Helsinki Airport (HEL)",
-  
-  // North America
-  "New York John F. Kennedy International Airport (JFK)",
-  "New York LaGuardia Airport (LGA)",
-  "Newark Liberty International Airport (EWR)",
-  "Los Angeles International Airport (LAX)",
-  "Chicago O'Hare International Airport (ORD)",
-  "Chicago Midway International Airport (MDW)",
-  "Miami International Airport (MIA)",
-  "San Francisco International Airport (SFO)",
-  "Boston Logan International Airport (BOS)",
-  "Washington Dulles International Airport (IAD)",
-  "Toronto Pearson International Airport (YYZ)",
-  "Vancouver International Airport (YVR)",
-  "Montreal Pierre Elliott Trudeau International Airport (YUL)",
-  
-  // Asia
-  "Singapore Changi Airport (SIN)",
-  "Hong Kong International Airport (HKG)",
-  "Tokyo Narita International Airport (NRT)",
-  "Tokyo Haneda Airport (HND)",
-  "Seoul Incheon International Airport (ICN)",
-  "Beijing Capital International Airport (PEK)",
-  "Shanghai Pudong International Airport (PVG)",
-  "Bangkok Suvarnabhumi Airport (BKK)",
-  "Kuala Lumpur International Airport (KUL)",
-  "Jakarta Soekarno-Hatta International Airport (CGK)",
-  "Manila Ninoy Aquino International Airport (MNL)",
-  "Mumbai Chhatrapati Shivaji International Airport (BOM)",
-  "Delhi Indira Gandhi International Airport (DEL)",
-  "Bangalore International Airport (BLR)",
-  "Chennai International Airport (MAA)",
-  "Hyderabad International Airport (HYD)",
-  "Kolkata Netaji Subhas Chandra Bose International Airport (CCU)",
-  
-  // Australia & Oceania
-  "Sydney Kingsford Smith Airport (SYD)",
-  "Melbourne Airport (MEL)",
-  "Brisbane Airport (BNE)",
-  "Perth Airport (PER)",
-  "Auckland Airport (AKL)",
-  
-  // Africa
-  "Cairo International Airport (CAI)",
-  "Johannesburg OR Tambo International Airport (JNB)",
-  "Cape Town International Airport (CPT)",
-  "Casablanca Mohammed V International Airport (CMN)",
-  "Lagos Murtala Muhammed International Airport (LOS)",
-  "Nairobi Jomo Kenyatta International Airport (NBO)",
-  "Addis Ababa Bole International Airport (ADD)",
-];
-
 // Airport autocomplete component
 const AirportInput = ({ value, onChange, placeholder }: { value: string; onChange: (value: string) => void; placeholder: string }) => {
   const [showSuggestions, setShowSuggestions] = useState(false);
@@ -117,7 +22,7 @@ const AirportInput = ({ value, onChange, placeholder }: { value: string; onChang
     const inputValue = e.target.value;
     onChange(inputValue);
     if (inputValue.length > 0) {
-      const filtered = internationalAirports.filter(airport =>
+      const filtered = internationalAirports.filter((airport: string) =>
         airport.toLowerCase().includes(inputValue.toLowerCase())
       );
       setFilteredAirports(filtered);
@@ -138,13 +43,13 @@ const AirportInput = ({ value, onChange, placeholder }: { value: string; onChang
 
   return (
     <div className="relative">
-      <Input 
+      <Input
         value={value}
         onChange={handleInputChange}
         placeholder={placeholder}
         onFocus={() => {
           if (value.length > 0) {
-            const filtered = internationalAirports.filter(airport =>
+            const filtered = internationalAirports.filter((airport: string) =>
               airport.toLowerCase().includes(value.toLowerCase())
             );
             setFilteredAirports(filtered);
@@ -240,7 +145,7 @@ export default function FlightSegmentsSection({ form }: FlightSegmentsSectionPro
               </Button>
             )}
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <FormField
               control={form.control}
@@ -249,10 +154,10 @@ export default function FlightSegmentsSection({ form }: FlightSegmentsSectionPro
                 <FormItem>
                   <FormLabel>Departure City</FormLabel>
                   <FormControl>
-                    <AirportInput 
-                      value={typeof field.value === 'string' ? field.value : ''} 
-                      onChange={field.onChange} 
-                      placeholder="Karachi Jinnah International Airport (KHI)" 
+                    <AirportInput
+                      value={typeof field.value === 'string' ? field.value : ''}
+                      onChange={field.onChange}
+                      placeholder="Karachi Jinnah International Airport (KHI)"
                     />
                   </FormControl>
                   <FormMessage />
@@ -267,10 +172,10 @@ export default function FlightSegmentsSection({ form }: FlightSegmentsSectionPro
                 <FormItem>
                   <FormLabel>Arrival City</FormLabel>
                   <FormControl>
-                    <AirportInput 
-                      value={typeof field.value === 'string' ? field.value : ''} 
-                      onChange={field.onChange} 
-                      placeholder="Doha Hamad International Airport (DOH)" 
+                    <AirportInput
+                      value={typeof field.value === 'string' ? field.value : ''}
+                      onChange={field.onChange}
+                      placeholder="Doha Hamad International Airport (DOH)"
                     />
                   </FormControl>
                   <FormMessage />
@@ -278,7 +183,7 @@ export default function FlightSegmentsSection({ form }: FlightSegmentsSectionPro
               )}
             />
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
             <FormField
               control={form.control}
@@ -333,7 +238,7 @@ export default function FlightSegmentsSection({ form }: FlightSegmentsSectionPro
               )}
             />
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <FormField
               control={form.control}

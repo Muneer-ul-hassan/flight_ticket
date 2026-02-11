@@ -26,8 +26,10 @@ export const flightSegmentSchema = z.object({
   from: z.string().min(1, "Origin airport is required"),
   to: z.string().min(1, "Destination airport is required"),
   date: z.string().min(1, "Date is required"),
+  arrivalDate: z.string().min(1, "Arrival date is required"),
   departureTime: z.string().min(1, "Departure time is required"),
   arrivalTime: z.string().min(1, "Arrival time is required"),
+  ticketType: z.string().optional(),
 });
 
 export const passengerSchema = z.object({
